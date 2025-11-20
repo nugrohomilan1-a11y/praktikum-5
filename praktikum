@@ -1,0 +1,107 @@
+def tambah_data(mahasiswa):
+    nim = input("Masukkan NIM: ")
+    if nim in mahasiswa:
+        print("Data dengan NIM ini sudah ada.")
+        return
+    nama = input("Masukkan Nama: ")
+    tugas = float(input("Masukkan nilai Tugas: "))
+    uts = float(input("Masukkan nilai UTS: "))
+    uas = float(input("Masukkan nilai UAS: "))
+    akhir = (tugas * 0.3) + (uts * 0.35) + (uas * 0.35)
+    mahasiswa[nim] = {
+        "nama": nama,
+        "tugas": tugas,
+        "uts": uts,
+        "uas": uas,
+        "akhir": akhir
+    }
+    print("Data berhasil ditambahkan.")
+
+def ubah_data(mahasiswa):
+    nim = input("Masukkan NIM yang ingin diubah: ")
+    if nim not in mahasiswa:
+        print("Data tidak ditemukan.")
+        return
+    print(f"Data saat ini: {mahasiswa[nim]}")
+    nama = input("Masukkan Nama baru (kosongkan jika tidak ingin mengubah): ")
+    tugas = input("Masukkan nilai Tugas baru (kosongkan jika tidak ingin mengubah): ")
+    uts = input("Masukkan nilai UTS baru (kosongkan jika tidak ingin mengubah): ")
+    uas = input("Masukkan nilai UAS baru (kosongkan jika tidak ingin mengubah): ")
+
+    if nama:
+        mahasiswa[nim]["nama"] = nama
+    if tugas:
+        mahasiswa[nim]["tugas"] = float(tugas)
+    if uts:
+        mahasiswa[nim]["uts"] = float(uts)
+    if uas:
+        mahasiswa[nim]["uas"] = float(uas)
+
+    mahasiswa[nim]["akhir"] = (
+        mahasiswa[nim]["tugas"] * 0.3 +
+        mahasiswa[nim]["uts"] * 0.35 +
+        mahasiswa[nim]["uas"] * 0.35
+    )
+    print("Data berhasil diubah.")
+
+def hapus_data(mahasiswa):
+    nim = input("Masukkan NIM yang ingin dihapus: ")
+    if nim in mahasiswa:
+        del mahasiswa[nim]
+        print("Data berhasil dihapus.")
+    else:
+        print("Data tidak ditemukan.")
+
+def tampilkan_data(mahasiswa):
+    if not mahasiswa:
+        print("Tidak ada data mahasiswa.")
+        return
+    print("{:<10} {:<20} {:<6} {:<6} {:<6} {:<6}".format("NIM", "Nama", "Tugas", "UTS", "UAS", "Akhir"))
+    for nim, data in mahasiswa.items():
+        print("{:<10} {:<20} {:<6} {:<6} {:<6} {:.2f}".format(
+            nim, data["nama"], data["tugas"], data["uts"], data["uas"], data["akhir"]
+        ))
+
+def cari_data(mahasiswa):
+    nim = input("Masukkan NIM yang dicari: ")
+    if nim in mahasiswa:
+        data = mahasiswa[nim]
+        print(f"NIM: {nim}")
+        print(f"Nama: {data['nama']}")
+        print(f"Tugas: {data['tugas']}")
+        print(f"UTS: {data['uts']}")
+        print(f"UAS: {data['uas']}")
+        print(f"Akhir: {data['akhir']:.2f}")
+    else:
+        print("Data tidak ditemukan.")
+
+def main():
+    mahasiswa = {}
+    while True:
+        print("\nMenu:")
+        print("1. Tambah Data")
+        print("2. Ubah Data")
+        print("3. Hapus Data")
+        print("4. Tampilkan Data")
+        print("5. Cari Data")
+        print("6. Keluar")
+        pilihan = input("Pilih menu (1-6): ")
+
+        if pilihan == '1':
+            tambah_data(mahasiswa)
+        elif pilihan == '2':
+            ubah_data(mahasiswa)
+        elif pilihan == '3':
+            hapus_data(mahasiswa)
+        elif pilihan == '4':
+            tampilkan_data(mahasiswa)
+        elif pilihan == '5':
+            cari_data(mahasiswa)
+        elif pilihan == '6':
+            print("Program selesai.")
+            break
+        else:
+            print("Pilihan tidak valid. Silakan coba lagi.")
+
+if __name__ == "__main__":
+    main()
