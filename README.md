@@ -16,7 +16,5 @@ Program ini dibuat untuk memenuhi *Tugas Praktikum* dengan ketentuan sebagai ber
 - Program menampilkan data mahasiswa beserta nilai akhirnya
 - Terdapat flowchart dan penjelasan program
 
----
 
-## 🧠 **Flowchart Program**
 
